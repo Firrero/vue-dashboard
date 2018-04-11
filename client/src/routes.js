@@ -8,6 +8,7 @@ import DashboardView from './components/views/Dashboard.vue'
 import TablesView from './components/views/Tables.vue'
 import TasksView from './components/views/Tasks.vue'
 import SettingView from './components/views/Setting.vue'
+import TimesheetView from './components/views/Timesheet.vue'
 
 // Routes
 const routes = [
@@ -31,11 +32,16 @@ const routes = [
         name: 'Dashboard',
         meta: {description: 'Overview of environment'}
       }, {
-        path: 'tables',
-        component: TablesView,
-        name: 'Tables',
-        meta: {description: 'Simple and advance table in CoPilot'}
-      }, {
+		    path: 'tables',
+		    component: TablesView,
+		    name: 'Tables',
+		    meta: {description: 'Simple and advance table in CoPilot'}
+	    }, {
+    	  path: 'timesheet',
+		    component: TimesheetView,
+		    name: 'Timesheet',
+		    meta: {description: 'Add your time to this timesheet'}
+	    }, {
         path: 'tasks',
         component: TasksView,
         name: 'Tasks',

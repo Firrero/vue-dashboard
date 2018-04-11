@@ -56,7 +56,9 @@ export default {
     }
   },
   props: ['displayName', 'pictureUrl', 'netStatus'],
-  components: { SidebarMenu },
+  components: {
+  	'sidebar-menu': SidebarMenu
+  },
   mounted: function() {
     window
       .jQuery('[data-toggle="hideseek"]')
