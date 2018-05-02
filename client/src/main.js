@@ -8,6 +8,8 @@ import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
 import routes from './routes'
 import store from './store'
+import Datatable from 'vue2-datatable-component'
+import VModal from 'vue-js-modal'
 
 // Import Helpers for filters
 import { domain, count, prettyDate, pluralize } from './filters'
@@ -22,6 +24,8 @@ Vue.filter('prettyDate', prettyDate)
 Vue.filter('pluralize', pluralize)
 
 Vue.use(VueRouter)
+Vue.use(Datatable)
+Vue.use(VModal)
 
 // Routing logic
 var router = new VueRouter({

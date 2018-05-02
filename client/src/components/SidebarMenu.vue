@@ -15,6 +15,12 @@
     </router-link>
 
     <li class="header">ME</li>
+    <router-link tag="li" class="pageLink" to="/timesheet">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Timesheet</span>
+      </a>
+    </router-link>
     <router-link tag="li" class="pageLink" to="/tasks">
       <a>
         <i class="fa fa-tasks"></i>

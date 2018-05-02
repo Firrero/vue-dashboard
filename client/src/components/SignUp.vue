@@ -27,7 +27,9 @@
             </form>
 
             <!-- errors -->
-            <div v-if=response class="text-red"  v-bind:class="{ 'text-green': noError }"><p class="vertical-5p lead">{{response}}</p></div>
+            <div v-if=response class="text-red"  v-bind:class="{ 'text-green': noError }">
+                <p class="vertical-5p lead">{{response}}</p>
+            </div>
         </div>
     </div>
 </template>
