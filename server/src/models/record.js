@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-const record = mongoose.Schema({
+var Schema = mongoose.Schema;
 
-	date: {type: String, required: false},
+const record = Schema({
+
+	uid: {type: String,required:false},
+	date: {type: Date, required: false},
 	project: {type: String, required: false},
 	activity: {type: String, required: false},
-	hours: {type: String, required: false},
+	hours: {type: Number, required: false},
 	feature: {type: String, required: false},
 	id: {type: String, required: false},
 	extra: {type: String, required: false}

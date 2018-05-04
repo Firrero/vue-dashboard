@@ -202,6 +202,7 @@ export default {
     // some methods
   }
 }
+
 </script>
 
 <style lang="scss">
@@ -213,6 +214,14 @@ export default {
 
   .content-wrapper {
     padding-top: 50px;
+    height: 100% !important;
+
+  }
+
+  .content-wrapper {
+    -webkit-transition: min-height 0.2s ease-in-out;
+    -o-transition: min-height 0.2s ease-in-out;
+    transition: min-height 0.2s ease-in-out;
   }
 
   .main-sidebar {

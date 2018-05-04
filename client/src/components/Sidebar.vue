@@ -14,7 +14,7 @@
             <p class="white">{{ displayName }}</p>
           </div>
           <a href="javascript:;">
-            <i class="fa fa-circle text-success"></i>{{ isOnline }}
+            <i class="fa fa-circle " v-bind:class="{ 'text-success': isActive, 'text-danger': notActive }"></i>{{ isOnline }}
           </a>
         </div>
       </div>
@@ -52,7 +52,9 @@ export default {
   name: 'Sidebar',
   data: function () {
     return {
-      isOnline: 'online'
+      isOnline: 'online',
+      isActive: true,
+      notActive: false
     }
   },
   props: ['displayName', 'pictureUrl', 'netStatus'],
@@ -72,9 +74,13 @@ export default {
   methods: {
     checkOnline () {
       if (navigator.onLine) {
-        return 'online'
+      	  this.isActive = true
+          this.notActive = false
+          return 'online'
       } else {
-        return 'offline'
+          this.isActive = false
+	      this.notActive = true
+          return 'offline'
       }
     }
   }

@@ -6,7 +6,6 @@ import NotFoundView from './components/404.vue'
 // Import Views - Dash
 import DashboardView from './components/views/Dashboard.vue'
 import TablesView from './components/views/Tables.vue'
-import TasksView from './components/views/Tasks.vue'
 import SettingView from './components/views/Setting.vue'
 import TimesheetView from './components/views/Timesheet.vue'
 
@@ -41,12 +40,7 @@ const routes = [
 		    component: TimesheetView,
 		    name: 'Timesheet',
 		    meta: {description: 'Add your time to this timesheet'}
-	    }, {
-        path: 'tasks',
-        component: TasksView,
-        name: 'Tasks',
-        meta: {description: 'Tasks page in the form of a timeline'}
-      }, {
+	    },{
         path: 'setting',
         component: SettingView,
         name: 'Settings',

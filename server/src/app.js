@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose');
 const user = require('./routes/user-route');
+const record = require('./routes/record-route')
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.post('/verify', (req, res) => {
 })
 
 app.use('/user', user);
+app.use('/record', record);
 
 app.listen(PORT, function(){
     console.log('Server is running on Port',PORT);
