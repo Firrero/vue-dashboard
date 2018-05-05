@@ -21,6 +21,7 @@
                         <i class="fa fa-remove"></i>
                         Remove
                     </button>
+
                     <!-- Future update -->
                     <!-- <button class="btn btn-default" @click="">
                         <i class="fa fa-reply"></i>
@@ -131,7 +132,7 @@
         },
 		data:  () => ({
 			columns: [
-				{ title: 'UID', field: 'uid', visible:true },
+				{ title: 'UID', field: 'uid', visible:false },
 				{ title: 'Date', field: 'date', tdComp: TableComps, sortable: true },
 				{ title: 'Project', field: 'project' },
 				{ title: 'Activity', field: 'activity', sortable: true },
@@ -154,7 +155,9 @@
             datePick:'',
 
             modalTitle:'',
-            modalButton:''
+            modalButton:'',
+
+
 
 		}),
 		watch: {
@@ -193,10 +196,13 @@
             },
 			getRecords() {
 
+                //console.log("user id->"+this.$store.state.userId)
+
 				var query = this.query
+                var userId = this.$store.state.userId
 
 				api
-					.request('post', '/record/getRecord', { query })
+					.request('post', '/record/getRecord', { query, userId })
 					.then(response => {
                         var data = response.data
 						this.data = data[0]
@@ -217,7 +223,7 @@
 			},
             createRecord() {
 
-                var uid = '_' + Math.random().toString(36).substr(2, 14)+this.datePick
+                var uid = '_' + Math.random().toString(36).substr(2, 14)+this.selectProject
 
                 if(this.selection[0]) {
 	                uid = this.selection[0].uid
@@ -230,13 +236,13 @@
                 var feature = this.selectFeature
                 var id = this.projectId
                 var extra = this.projectInfo
+                var userId = this.$store.state.userId
 
 	            api
-		            .request('post', '/record/create', { uid, date, project, activity, hours, feature, id, extra })
+		            .request('post', '/record/create', { uid, date, project, activity, hours, feature, id, extra, userId })
 		            .then(response => {
-					    var data = response.data.success
                       /* if success exists */
-                        if(data){
+                        if(response.data.success){
 	                        this.getRecords()
                         }
 		            })
@@ -281,6 +287,7 @@
                 }
 			},
             clearForm() {
+				this.datePick = ''
 	            this.selectProject = ''
 	            this.selectActivity = ''
 	            this.projectHours = ''

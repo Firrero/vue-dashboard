@@ -11,7 +11,8 @@ const record = Schema({
 	hours: {type: Number, required: false},
 	feature: {type: String, required: false},
 	id: {type: String, required: false},
-	extra: {type: String, required: false}
+	extra: {type: String, required: false},
+	userId: {type: String, required: true}
 
 });
 

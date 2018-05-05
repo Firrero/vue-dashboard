@@ -9,5 +9,6 @@ export default {
     notifications: [],
     tasks: []
   },
-  onlineStatus: 'online'
+  onlineStatus: 'online',
+	userId: '',
 }

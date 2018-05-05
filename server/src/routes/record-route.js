@@ -47,15 +47,16 @@ router.post('/editRecord', function(req, res) {
 router.post('/getRecord', function(req, res) {
 
 	var query = req.body.query
+	var userId = req.body.userId
 	var sortBy = {}
 	query.sort == 0 ? sortBy = 0: sortBy[query.sort] = query.order
 
-	Record.find({},'uid date project activity hours feature id extra', function(err, users){
+	Record.find({userId:userId},'uid date project activity hours feature id extra', function(err, records){
 		if(err){
 			console.log(err);
 		} else{
 			Record.count({}, function (error, count) {
-				res.json([users,count]);
+				res.json([records,count]);
 			});
 		}
 	}).skip(query.offset).limit(query.limit).sort(sortBy)
@@ -77,7 +78,8 @@ router.post('/create', function(req, res){
 			hours: req.body.hours,
 			feature: req.body.feature,
 			id: req.body.id,
-			extra: req.body.extra
+			extra: req.body.extra,
+			userId: req.body.userId
 		},
 		{upsert: true},
 		function (err, updated) {

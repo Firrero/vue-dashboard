@@ -37,6 +37,7 @@ export default {
       loading: '',
       email: '',
       password: '',
+      userId:'',
       response: ''
     }
   },
@@ -60,24 +61,24 @@ export default {
             this.response = data.error
           }
 
-          /* Setting user in the state and caching record to the localStorage */
+          /* Setting user email in the state and caching record to the localStorage */
           if (data.user) {
             /* var token = 'Bearer ' + data.token */
             var token = data.token
 
-            console.log(token)
-
+	        this.$store.commit('SET_USERID', data.userId)
             this.$store.commit('SET_USER', data.user)
-            this.$store.commit('SET_TOKEN', token)
+	        this.$store.commit('SET_TOKEN', token)
 
             if (window.localStorage) {
               window.localStorage.setItem('user', JSON.stringify(data.user))
               window.localStorage.setItem('token', token)
+              window.localStorage.setItem('userId', data.userId)
             }
 
             this.$router.push(data.redirect ? data.redirect : '/')
             // seems to fix footer bug after login :|
-            location.reload()
+            //location.reload()
           }
         })
         .catch(error => {

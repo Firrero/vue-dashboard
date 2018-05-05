@@ -8,6 +8,9 @@ export default {
   SET_USER (state, user) {
     state.user = user
   },
+	SET_USERID (state, userId) {
+		state.userId = userId
+	},
   SET_TOKEN (state, token) {
     state.token = token
   },

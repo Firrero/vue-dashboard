@@ -88,6 +88,7 @@ export default {
       if (window.localStorage) {
         window.localStorage.setItem('user', null)
         window.localStorage.setItem('token', null)
+	    window.localStorage.setItem('userId', null)
       }
 
       this.$router.push('/login')

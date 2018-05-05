@@ -28,7 +28,8 @@ router.post('/signup', function(req, res) {
 					const user = new User({
 						_id: new  mongoose.Types.ObjectId(),
 						email: req.body.email,
-						password: hash
+						password: hash,
+						userId: '_' + Math.random().toString(36).substr(2, 14)+req.body.email
 					});
 
 					user.save().then(function(result) {
@@ -68,7 +69,8 @@ router.post('/signin', function(req, res){
                     return res.status(200).json({
                         success: 'Welcome to the JWT Auth',
                         user:user.email,
-                        token: JWTToken
+                        token: JWTToken,
+	                      userId: user.userId
                     });
                 }
                 return res.status(401).json({
