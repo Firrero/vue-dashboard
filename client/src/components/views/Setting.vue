@@ -4,20 +4,15 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          <form v-on:submit.prevent="updateUser()" role="form" class="setting-form">
           <div class="box box-info">
             <!-- Input Addons -->
             <div class="box-header with-border">
-              <h3 class="box-title">Inputs</h3>
+              <h3 class="box-title">User</h3>
             </div>
 
             <div class="box-body">
-              <!-- calendar group -->
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="fa fa-fw fa-calendar"></i>
-                </span>
-                <datepicker :readonly="true" format="MMM/D/YYYY" id="dateInput" width="100%"></datepicker>
-              </div>
+
               <br />
               <br />
 
@@ -26,100 +21,81 @@
                 <span class="input-group-addon">
                   <i class="fa fa-fw fa-at" aria-hidden="true"></i>
                 </span>
-                <input class="form-control" placeholder="Username" type="text">
+                <input class="form-control" v-model="currentUser" placeholder="Username" type="text">
               </div>
               <br />
               <div class="input-group">
                 <span class="input-group-addon">
-                  <i class="fa fa-fw fa-usd" aria-hidden="true"></i>
+                  <i class="fa fa-key" aria-hidden="true"></i>
                 </span>
-                <input class="form-control" type="text">
-                <span class="input-group-addon">.00</span>
-              </div>
-              <br />
-
-              <!-- with icons from font awesome -->
-              <h4>With icons</h4>
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
-                <input class="form-control" placeholder="Email" type="email">
-              </div>
-              <br />
-              <div class="input-group">
-                <input class="form-control" type="text">
-                <span class="input-group-addon"><i class="fa fa-fw fa-check"></i></span>
-              </div>
-              <br>
-
-              <!-- Success/Error heads up input -->
-              <h4>With border indicator</h4>
-              <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess"><i class="fa fa-fw fa-check"></i> Input with success</label>
-                <input class="form-control" id="inputSuccess" placeholder="Enter ..." type="text">
-                <span class="help-block">Help block with success</span>
-              </div>
-              <br />
-              <div class="form-group has-error">
-                <label class="control-label" for="inputError"><i class="fa fa-fw fa-times-circle-o"></i> Input with error</label>
-                <input class="form-control" id="inputError" placeholder="Enter ..." type="text">
-                <span class="help-block">Help block with error</span>
+                <input class="form-control" placeholder="Password" v-model="newPassword" type="password">
               </div>
 
-              <!-- select examples -->
-              <h4>Select Options</h4>
-              <div class="form-group">
-                <label>Select</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
-              <br />
-              <div class="form-group">
-                <label>Select Multiple</label>
-                <select multiple="" class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
+            </div>
 
-              <!-- /input-group -->
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Save</button>
             </div>
             <!-- /.box-body -->
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </section>
   </div>
 </template>
 <script>
-require('moment')
+
+import api from '../../api'
 import datepicker from 'vue-date-picker'
 
 export default {
   name: 'Settings',
   components: { datepicker },
   computed: {
-    datetime () {
-      return new Date()
-    }
+
+  },
+  data: function () {
+	  return {
+	  	newPassword: '',
+        currentUser: this.$store.state.user
+	  }
   },
   methods: {
-    clearInput (vueModel) {
-      vueModel = ''
-    }
+  	updateUser(){
+  		// updating user on db
+      var uid = this.$store.state.userId
+      var email =  this.currentUser
+      var password = this.newPassword
+
+		  api
+			  .request('post', '/user/editUser', { uid, email, password })
+			  .then(response => {
+				  console.log("got response from server: "+response.success)
+
+			  })
+			  .catch(error => {
+				  this.$store.commit('TOGGLE_LOADING')
+				  console.log(error)
+
+				  if (error) {
+					  //this.response = error.response.data.error
+				  } else {
+					  //this.response = 'default response'
+				  }
+				  this.toggleLoading()
+			  })
+
+      console.log("updating a user")
+      console.log("new name:"+this.currentUser)
+      console.log("new pass:"+this.newPassword)
+
+	  }
+
   }
 }
 </script>
 
 <style>
-.datetime-picker input {
-  height: 4em !important;
-}
+
 </style>

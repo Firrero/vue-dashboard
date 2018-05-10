@@ -1,121 +1,123 @@
 <template>
-    <div class="col-xs-12">
+    <section class="content">
+        <div class="row center-block">
+            <h2>Activity</h2>
+            <div class="col-md-12">
        <!-- <code>query: {{ query }}</code> -->
-        <div class="box">
-            <div class="box-header">
-                Data table for task
-            </div>
-            <div class="box-body">
-                <datatable v-bind="$data">
-                    <button class="btn btn-default" v-on:click="show()">
-                        <i class="fa fa-pencil"></i>
-                        Add task
-                    </button>
+                <div class="box">
+                    <div class="box-header">
+                        Data table for task
+                    </div>
+                    <div class="box-body">
+                        <datatable v-bind="$data">
+                            <button class="btn btn-default" v-on:click="show()">
+                                <i class="fa fa-pencil"></i>
+                                Add task
+                            </button>
 
-                    <button class="btn btn-default" @click="showEdit()">
-                        <i class="fa fa-edit"></i>
-                        Edit
-                    </button>
+                            <button class="btn btn-default" @click="showEdit()">
+                                <i class="fa fa-edit"></i>
+                                Edit
+                            </button>
 
-                    <button class="btn btn-default" @click="removeRecord()">
-                        <i class="fa fa-remove"></i>
-                        Remove
-                    </button>
+                            <button class="btn btn-default" @click="removeRecord()">
+                                <i class="fa fa-remove"></i>
+                                Remove
+                            </button>
 
-                    <!-- Future update -->
-                    <!-- <button class="btn btn-default" @click="">
-                        <i class="fa fa-reply"></i>
-                        Restore
-                    </button> -->
+                            <!-- Future update -->
+                            <!-- <button class="btn btn-default" @click="">
+                                <i class="fa fa-reply"></i>
+                                Restore
+                            </button> -->
 
-                    <button class="btn btn-default" v-on:click="getRecords()">
-                        <i class="fa fa-refresh"></i>
-                        Update
-                    </button>
+                            <button class="btn btn-default" v-on:click="getRecords()">
+                                <i class="fa fa-refresh"></i>
+                                Update
+                            </button>
 
-                    <modal name="create-task-modal">
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">{{ modalTitle }}</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <!-- form start -->
-                            <form v-on:submit.prevent="hide();createRecord()" role="form" class="timesheet-modal-form">
-                                <div class="box-body">
-                                    <div class="input-group">
-                                    <span class="input-group-addon" style="height:2em !important;">
-                                        <i class="fa fa-fw fa-calendar"></i>
-                                    </span>
-                                        <datepicker placeholder=" Pick a date" v-model="datePick" required ></datepicker>
+                            <modal name="create-task-modal">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">{{ modalTitle }}</h3>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="select-project">Project</label>
-                                        <select v-model="selectProject" id="select-project" class="form-control">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="select-activity">Activity</label>
-                                        <select v-model="selectActivity" id="select-activity" class="form-control">
-                                            <option>Architecture</option>
-                                            <option>Design</option>
-                                            <option>Development</option>
-                                            <option>Holiday</option>
-                                            <option>Managmenet</option>
-                                            <option>Product Owner</option>
-                                            <option>Sickness</option>
-                                            <option>Overtime</option>
-                                            <option>Support</option>
-                                            <option>Testing</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label" for="project-hours">
-                                            Input with success
-                                        </label>
-                                        <input v-model="projectHours" class="form-control" id="project-hours" placeholder="Enter hours ..." type="number" step="0.1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="select-feature">Feature</label>
-                                        <select v-model="selectFeature" id="select-feature" class="form-control">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label" for="project-id">Project ID</label>
-                                        <input v-model="projectId" class="form-control" id="project-id" placeholder="ID ..." type="text">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label" for="project-info">Extra information</label>
-                                        <textarea v-model="projectInfo" id="project-info" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                    </div>
+                                    <!-- /.box-header -->
+                                    <!-- form start -->
+                                    <form v-on:submit.prevent="hide();createRecord()" role="form" class="timesheet-modal-form">
+                                        <div class="box-body">
+                                            <div class="input-group">
+                                            <span class="input-group-addon" style="height:2em !important;">
+                                                <i class="fa fa-fw fa-calendar"></i>
+                                            </span>
+                                                <datepicker placeholder=" Pick a date" v-model="datePick" required ></datepicker>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="select-project">Project</label>
+                                                <select v-model="selectProject" id="select-project" class="form-control">
+                                                    <option>option 1</option>
+                                                    <option>option 2</option>
+                                                    <option>option 3</option>
+                                                    <option>option 4</option>
+                                                    <option>option 5</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="select-activity">Activity</label>
+                                                <select v-model="selectActivity" id="select-activity" class="form-control">
+                                                    <option>Architecture</option>
+                                                    <option>Design</option>
+                                                    <option>Development</option>
+                                                    <option>Holiday</option>
+                                                    <option>Managmenet</option>
+                                                    <option>Product Owner</option>
+                                                    <option>Sickness</option>
+                                                    <option>Overtime</option>
+                                                    <option>Support</option>
+                                                    <option>Testing</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="project-hours">
+                                                    Input with success
+                                                </label>
+                                                <input v-model="projectHours" class="form-control" id="project-hours" placeholder="Enter hours ..." type="number" step="0.1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="select-feature">Feature</label>
+                                                <select v-model="selectFeature" id="select-feature" class="form-control">
+                                                    <option>option 1</option>
+                                                    <option>option 2</option>
+                                                    <option>option 3</option>
+                                                    <option>option 4</option>
+                                                    <option>option 5</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="project-id">Project ID</label>
+                                                <input v-model="projectId" class="form-control" id="project-id" placeholder="ID ..." type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="project-info">Extra information</label>
+                                                <textarea v-model="projectInfo" id="project-info" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                            </div>
 
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <!-- v-on:submit.prevent="hide();createRecord()" -->
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">{{ modalButton }}</button>
+                                            <button class="btn btn-danger right" v-on:click="hide()">Close</button>
+                                        </div>
+
+                                    </form>
                                 </div>
-                                <!-- /.box-body -->
-                                <!-- v-on:submit.prevent="hide();createRecord()" -->
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">{{ modalButton }}</button>
-                                </div>
-
-                            </form>
-                        </div>
-                    </modal>
-
-
-
-                </datatable>
+                            </modal>
+                        </datatable>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>
+    </section>
 </template>
 
 <script>
@@ -301,11 +303,19 @@
 </script>
 
 <style>
+    .btn.right {
+        float:right;
+    }
+    @media (max-width:960px) {
+        .form-group {
+            margin-bottom: 0px !important;
+        }
+    }
     .vdp-datepicker input {
         width:100%;
     }
-    .input-group input {
-        height:2.5em;
+    .vdp-datepicker input {
+        height: 2.5em;
     }
     .btn-default {
         margin-right:5px;
@@ -313,6 +323,8 @@
     .v--modal-box.v--modal {
         height:670px !important;
         top:60px !important;
+        max-width:600px !important;
+        width:auto !important;
     }
     .timesheet-modal-form {
         padding:0px !important;

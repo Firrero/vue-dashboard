@@ -15,7 +15,7 @@ router.post('/removeRecord', function(req, res){
 })
 
 /* ---- Update record ---- */
-
+/*
 router.post('/editRecord', function(req, res) {
 
 	var id = req.body.uid
@@ -39,6 +39,21 @@ router.post('/editRecord', function(req, res) {
 			});
 		});
 })
+*/
+/* --- GET statistic --- */
+
+router.post('/getStatistics', function(req, res) {
+	var userId = req.body.uid
+	Record.find({userId:userId},'date hours activity ', function(err, records){
+		if(err){
+			console.log(err);
+		} else{
+			Record.count({userId:userId}, function (error, count) {
+				res.json([records,count]);
+			});
+		}
+	})
+})
 
 
 
@@ -55,7 +70,7 @@ router.post('/getRecord', function(req, res) {
 		if(err){
 			console.log(err);
 		} else{
-			Record.count({}, function (error, count) {
+			Record.count({userId:userId}, function (error, count) {
 				res.json([records,count]);
 			});
 		}

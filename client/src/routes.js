@@ -5,7 +5,6 @@ import NotFoundView from './components/404.vue'
 
 // Import Views - Dash
 import DashboardView from './components/views/Dashboard.vue'
-import TablesView from './components/views/Tables.vue'
 import SettingView from './components/views/Setting.vue'
 import TimesheetView from './components/views/Timesheet.vue'
 
@@ -30,12 +29,7 @@ const routes = [
         component: DashboardView,
         name: 'Dashboard',
         meta: {description: 'Overview of environment'}
-      }, {
-        path: 'tables',
-        component: TablesView,
-        name: 'Tables',
-        meta: {description: 'Simple and advance table in CoPilot'}
-      }, {
+      },{
 		    path: 'timesheet',
 		    component: TimesheetView,
 		    name: 'Timesheet',

@@ -85,3 +85,51 @@ router.post('/signin', function(req, res){
         });
 });
 
+/* ---- Update record ---- */
+
+router.post('/editUser', function(req, res) {
+
+	// var id = req.body.uid
+	var newPassword = ''
+
+	if(req.body.password){
+		bcrypt.hash(req.body.password, 10, function(err, hash) {
+			if (err) {
+				return res.status(500).json({
+					error: err
+				});
+			}else {
+				User.update(
+					{userId: req.body.uid},
+					{
+						email: req.body.email,
+						password:hash
+					},
+					{upsert: true},
+					function (err, updated) {
+						if(err){}
+						res.status(200).json({
+						success: 'User updated'
+						});
+					});
+				}
+		})
+	}else {
+		User.update(
+			{userId: req.body.uid},
+			{
+				email: req.body.email
+			},
+			{upsert: true},
+			function (err, updated) {
+				if(err){}
+				res.status(200).json({
+					success: 'User updated'
+				});
+			}
+		);
+	}
+
+
+
+})
