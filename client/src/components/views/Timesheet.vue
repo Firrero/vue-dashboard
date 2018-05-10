@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="project-hours">
-                                                    Input with success
+                                                    Hours
                                                 </label>
                                                 <input v-model="projectHours" class="form-control" id="project-hours" placeholder="Enter hours ..." type="number" step="0.1">
                                             </div>
