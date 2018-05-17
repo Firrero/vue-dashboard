@@ -47,37 +47,38 @@
 
 				var  obj = {}
 				var dataArray = Array.apply(null, Array(12)).map(Number.prototype.valueOf, 0);
+				var token = this.$store.state.token
 
 				var uid = this.$store.state.userId
 				api
-					.request('post', '/record/getStatistics', {uid})
+					.request('post', '/record/getStatistics', {uid, token})
 					.then(response => {
 
-						var data = response.data[0]
-						for (var i = 0; i < data.length; i++) {
+					var data = response.data[0]
+					for (var i = 0; i < data.length; i++) {
 
-							// Axis
-							var taskDate = parseInt(data[i].date.substring(5, 7))
-							dataArray[taskDate - 1] = dataArray[taskDate - 1] + data[i].hours
+					// Axis
+					var taskDate = parseInt(data[i].date.substring(5, 7))
+					dataArray[taskDate - 1] = dataArray[taskDate - 1] + data[i].hours
 
-                            // Pie
-                            if(!obj.hasOwnProperty(data[i].activity)){
-							    obj[data[i].activity] = +1
-                            }else {
-							    var count = obj[data[i].activity]
-								obj[data[i].activity] = count + 1
-                            }
-						}
+					// Pie
+					if(!obj.hasOwnProperty(data[i].activity)){
+						obj[data[i].activity] = +1
+					}else {
+						var count = obj[data[i].activity]
+						obj[data[i].activity] = count + 1
+					}
+				}
 
-						this.createChart(dataArray)
-                        this.createPie(obj)
+				this.createChart(dataArray)
+				this.createPie(obj)
 
-					})
-					.catch(error => {
-						this.$store.commit('TOGGLE_LOADING')
-						console.log(error)
+			})
+			.catch(error => {
+					this.$store.commit('TOGGLE_LOADING')
+				console.log(error)
 
-					})
+			})
 			},
 			createChart(dataArray) {
 
@@ -115,16 +116,16 @@
 
 			},
 			createPie(obj) {
-                var labelsArr = []
-                var dataArr = []
-                var count = 0
+				var labelsArr = []
+				var dataArr = []
+				var count = 0
 
-                for(var k in obj) count = count + obj[k]
+				for(var k in obj) count = count + obj[k]
 
 				for(var e in obj){
-                    labelsArr.push(e)
-                    dataArr.push(obj[e]/count*100)
-                }
+					labelsArr.push(e)
+					dataArr.push(obj[e]/count*100)
+				}
 
 				var pieChartCanvas = document.getElementById('languagePie').getContext('2d')
 				var pieConfig = {
@@ -160,7 +161,7 @@
 			this.$nextTick(() => {
 				this.generateStatistics()
 
-			})
+		})
 		}
 	}
 </script>
